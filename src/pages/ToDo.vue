@@ -2,7 +2,7 @@
   <q-page class="bg-grey-2 column">
     <div class="row q-pa-sm bg-primary">
       <q-input
-        @keyup.enter="addElement()"
+        @keyup.enter="sendElement()"
         class="col"
         square
         filled
@@ -13,7 +13,7 @@
       >
         <template v-slot:append>
           <q-btn
-            @click="addElement()"
+            @click="sendElement()"
             round
             dense
             flat
@@ -22,7 +22,7 @@
       </q-input>
     </div>
 
-    <!-- <q-list
+    <q-list
       class="bg-white"
       separator
       bordered
@@ -95,9 +95,9 @@
         </q-item-section>
       </q-item>
 
-    </q-list> -->
+    </q-list>
 
-
+<!--
     <q-list
       v-for="task in tasks "
       :key="task.title"
@@ -131,7 +131,7 @@
 
 
 
-    </q-list>
+    </q-list> -->
 
   </q-page>
 </template>
@@ -142,55 +142,56 @@ import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
 import Quasar, { useQuasar } from 'quasar';
 
-var newTaskText = '';
+// var newTaskText = '';
+const newTaskText = ref('');
 
-// const titleQuasar = 'Iniciar curso quasar';
-// var doneQuasar = ref(false);
+const titleQuasar = 'Iniciar curso quasar';
+var doneQuasar = ref(false);
 
-// const titleStyles = 'Aplicar Estilos';
-// var doneStyles = ref(false);
+const titleStyles = 'Aplicar Estilos';
+var doneStyles = ref(false);
 
-// const titleMeeting = 'Reunion';
-// var doneMeeting = ref(false);
+const titleMeeting = 'Reunion';
+var doneMeeting = ref(false);
 
-// var isQuasarDeleted = ref(false);
-// var areStylesDeleted = ref(false);
-// var isDeleted = ref(false);
-var isTaskDeleted = ref(false);
+var isQuasarDeleted = ref(false);
+var areStylesDeleted = ref(false);
+var isDeleted = ref(false);
+// var isTaskDeleted = ref(false);
 
 const $q = useQuasar ();
 
-const tasks = [
-  {
-    title: 'Iniciar curso Quasar',
-    done: false
-  }
-]
+// const tasks = [
+//   {
+//     title: 'Iniciar curso Quasar',
+//     done: false
+//   }
+// ]
 
-// function deleteQuasar  ()  {
-//   $q.dialog({
-//     title: 'Confirm',
-//     message: 'Eliminar elemento de la lista?',
-//     cancel: true,
-//     persistent: true
-//   }).onOk(() => {
-//     isQuasarDeleted.value = true;
-//     $q.notify('Elemento eliminado')
-//   })
-//   return isDeleted
-// }
-// function deleteStyles  ()  {
-//   $q.dialog({
-//     title: 'Confirm',
-//     message: 'Eliminar elemento de la lista?',
-//     cancel: true,
-//     persistent: true
-//   }).onOk(() => {
-//     areStylesDeleted.value = true;
-//     $q.notify('Elemento eliminado')
-//   })
-//   return isDeleted
-// }
+function deleteQuasar  ()  {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Eliminar elemento de la lista?',
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    isQuasarDeleted.value = true;
+    $q.notify('Elemento eliminado')
+  })
+  return isDeleted
+}
+function deleteStyles  ()  {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Eliminar elemento de la lista?',
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    areStylesDeleted.value = true;
+    $q.notify('Elemento eliminado')
+  })
+  return isDeleted
+}
 function deleteTask  ()  {
   $q.dialog({
     title: 'Confirm',
@@ -198,28 +199,28 @@ function deleteTask  ()  {
     cancel: true,
     persistent: true
   }).onOk(() => {
-    isTaskDeleted.value = true;
+    isDeleted.value = true;
     $q.notify('Elemento eliminado')
   })
-  return isTaskDeleted
+  return isDeleted
 }
 
-function addElement () {
-  tasks.push({
-    title:  newTaskText,
-    done: false
-  })
+// function addElement () {
+//   tasks.push({
+//     title:  newTaskText,
+//     done: false
+//   })
+// }
+
+
+
+function sendElement () {
+  var titleTask = newTaskText;
+  var doneTask = ref(false);
+  console.log(titleTask.value, doneTask.value)
+  newTaskText.value = ''
+  // return {titleTask, doneTask}
 }
-
-
-
-//  function sendElement () {
-//    var titleTask = newTaskText;
-//    var doneTask = ref(false);
-//    console.log(titleTask.value, doneTask.value)
-//    return {titleTask, doneTask}
-//    newTaskText.value = ''
-//  }
 
 
 
